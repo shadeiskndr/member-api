@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: membership-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: springbootdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  minio:
+    image: minio/minio
+    container_name: membership-minio
+    environment:
+      MINIO_ROOT_USER: 8o1mKtpg395yOfD3d9Y5
+      MINIO_ROOT_PASSWORD: Kkirw3JXKRUA334FKMMKhvVbM4VEQd4D5xZmol9R
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+    command: server --console-address ":9001" /data
+
+volumes:
+  mysql-data:
+  minio-data:
